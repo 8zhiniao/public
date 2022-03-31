@@ -42,7 +42,6 @@ func setZapLoggerEncoder(logOutFormat string) zapcore.Encoder {
 	var encoder zapcore.Encoder
 
 	encoderConfig := zap.NewProductionEncoderConfig()
-	encoderConfig.EncodeLevel = zapcore.CapitalColorLevelEncoder
 
 	encoderConfig.EncodeTime = func(t time.Time, enc zapcore.PrimitiveArrayEncoder) {
 		enc.AppendString(t.Format("2006-01-02 15:04:05"))
@@ -72,10 +71,13 @@ func setZapLoggerEncoder(logOutFormat string) zapcore.Encoder {
 
 	switch logOutFormat {
 	case "json":
+		encoderConfig.EncodeLevel = zapcore.CapitalLevelEncoder
 		encoder = zapcore.NewJSONEncoder(encoderConfig)
 	case "console":
+		encoderConfig.EncodeLevel = zapcore.CapitalColorLevelEncoder
 		encoder = zapcore.NewConsoleEncoder(encoderConfig)
 	default:
+		encoderConfig.EncodeLevel = zapcore.CapitalColorLevelEncoder
 		encoder = zapcore.NewConsoleEncoder(encoderConfig)
 	}
 
