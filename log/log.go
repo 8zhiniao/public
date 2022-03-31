@@ -42,7 +42,6 @@ func setZapLoggerEncoder(logOutFormat string) zapcore.Encoder {
 	var encoder zapcore.Encoder
 
 	encoderConfig := zap.NewProductionEncoderConfig()
-
 	encoderConfig.EncodeLevel = zapcore.CapitalColorLevelEncoder
 
 	encoderConfig.EncodeTime = func(t time.Time, enc zapcore.PrimitiveArrayEncoder) {
