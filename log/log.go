@@ -26,7 +26,7 @@ func InitLoggerFromParams(logFile string, logLevel string, logOutFormat string, 
 
 	logCore := setZapLoggerCore(logFile, logLevel, logOutFormat, maxSize, maxAge, maxBackups, localTime, compress)
 
-	logger = zap.New(logCore, zap.AddCaller(), zap.AddCallerSkip(1), zap.AddStacktrace(zapcore.DebugLevel))
+	logger = zap.New(logCore, zap.AddCaller(), zap.AddCallerSkip(1), zap.AddStacktrace(zapcore.PanicLevel))
 
 	sugaredLogger = logger.Sugar()
 
